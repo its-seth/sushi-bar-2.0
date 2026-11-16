@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seaside Sushi Bar · Leaderboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-board">
+  <header class="shop-top">
+    <div class="noren" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="hud">
+      <div class="hud-brand">Seaside Sushi Bar</div>
+      <div class="hud-actions">
+        <a class="btn btn-small" href="game.html">Back to the bar</a>
+        <button id="logout-btn" class="link-btn" type="button">Log out</button>
+      </div>
+    </div>
+  </header>
+  <main class="board-page">
+    <h1 class="board-title">Best sushi chefs</h1>
+    <p id="board-status" class="board-status">Loading scores…</p>
+    <table class="board-table">
+      <thead><tr><th scope="col">Rank</th><th scope="col">Chef</th><th scope="col">Coins</th><th scope="col">Best day</th></tr></thead>
+      <tbody id="board-body"></tbody>
+    </table>
+  </main>
+  <script type="module" src="js/leaderboard-page.js"></script>
+</body>
+</html>
