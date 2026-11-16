@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seaside Sushi Bar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-game">
+  <header class="shop-top">
+    <div class="noren" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="hud">
+      <div class="hud-brand">Seaside Sushi Bar</div>
+
+      <div class="hud-day">
+        <span id="day-label">Day 1</span>
+        <div class="timebar" role="progressbar" aria-label="Time left today"><div id="time-fill"></div></div>
+        <span id="time-left" class="time-left">60s</span>
+      </div>
+
+      <div class="hud-stats">
+        <span id="hearts" class="hearts" aria-label="Hearts"></span>
+        <span class="chip"><i class="coin" aria-hidden="true"></i><b id="coins">0</b><span class="sr-only">coins</span></span>
+        <span id="fish-chip" class="chip"><span aria-hidden="true">🐟</span><b id="fish">0</b><span class="sr-only">fish in stock</span></span>
+      </div>
+
+      <div class="hud-actions">
+        <a class="btn btn-small btn-quiet" href="leaderboard.html">Leaderboard</a>
+        <span class="hud-user"><span id="username"></span><button id="logout-btn" class="link-btn" type="button">Log out</button></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="restaurant">
+    <section class="bar" aria-label="Customers">
+      <div id="seats" class="seats"></div>
+      <div class="counter-top" aria-hidden="true"></div>
+    </section>
+
+    <section class="kitchen" aria-label="Kitchen">
+      <div class="board">
+        <div class="plate-area">
+          <div id="plate" class="plate" aria-live="polite"></div>
+          <button id="clear-btn" class="btn btn-small btn-quiet" type="button">Clear plate <span class="key">X</span></button>
+        </div>
+        <div id="ingredients" class="ingredients"></div>
+      </div>
+
+      <aside class="recipe-card" aria-label="Recipes">
+        <h2>Today’s menu</h2>
+        <ul id="recipe-list" class="recipe-list"></ul>
+        <div class="restock">
+          <button id="order-fish-btn" class="btn btn-sea" type="button">Order more fish</button>
+          <span class="restock-left">Solve a Fish API puzzle to restock</span>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Start screen -->
+  <div id="overlay-start" class="overlay" hidden>
+    <div class="modal">
+      <h2 class="modal-title">Ready to open the bar?</h2>
+      <ol class="how-to">
+        <li>Each morning, count the fish delivery crate to stock up.</li>
+        <li>Read a customer’s order, tap the ingredients, then press Serve.</li>
+        <li>Wrong dishes and customers who give up waiting cost a heart.</li>
+        <li>Out of fish? Order more fish (another crate to count). Out of hearts? Game over.</li>
+      </ol>
+      <p class="keys-help">Keys: <span class="key">1</span>–<span class="key">5</span> ingredients · <span class="key">Q</span> <span class="key">W</span> <span class="key">E</span> serve · <span class="key">X</span> clear</p>
+      <button id="start-btn" class="btn btn-primary btn-big" type="button">Open the sushi bar</button>
+    </div>
+  </div>
+
+  <!-- Fish API delivery puzzle -->
+  <div id="puzzle" class="overlay" hidden>
+    <div class="modal modal-delivery" role="dialog" aria-modal="true" aria-labelledby="puzzle-title">
+      <div class="delivery-head">
+        <div>
+          <h2 id="puzzle-title" class="modal-title">Fish delivery</h2>
+          <p>Count the fish correctly to get the full delivery.</p>
+        </div>
+        <span id="puzzle-timer" class="delivery-timer"></span>
+      </div>
+      <div class="crate">
+        <p id="puzzle-loading" class="crate-loading">Opening the crate…</p>
+        <img id="puzzle-image" alt="The crate from the Fish Game API" hidden>
+      </div>
+      <p id="puzzle-question" class="delivery-question"></p>
+      <div id="puzzle-answers" class="delivery-options"></div>
+      <p id="puzzle-result" class="delivery-result" hidden></p>
+      <button id="puzzle-continue" class="btn btn-primary" type="button" hidden>Continue</button>
+    </div>
+  </div>
+
+  <!-- End of day -->
+  <div id="overlay-day" class="overlay" hidden>
+    <div class="modal">
+      <h2 id="day-end-title" class="modal-title">Day 1 is over</h2>
+      <p class="final-score"><span id="day-end-coins">0</span> coins so far</p>
+      <div class="modal-actions">
+        <button id="next-day-btn" class="btn btn-primary" type="button">Start the next day</button>
+        <button id="quit-btn" class="btn btn-quiet" type="button">Save and quit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game over -->
+  <div id="overlay-over" class="overlay" hidden>
+    <div class="modal">
+      <h2 class="modal-title">The sushi bar is closed</h2>
+      <p class="final-score"><span id="over-score">0</span> coins</p>
+      <p id="over-day"></p>
+      <p id="over-save" class="save-status"></p>
+      <div class="modal-actions">
+        <button id="play-again-btn" class="btn btn-primary" type="button">Play again</button>
+        <a class="btn btn-quiet" href="leaderboard.html">See the leaderboard</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/game-main.js"></script>
+</body>
+</html>
